@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="de4dot.blocks">
+      <HintPath>..\..\..\..\Desktop\Revere Engineering\Utils\de4dot.blocks.dll</HintPath>
+    </Reference>
+    <Reference Include="dnlib">
+      <HintPath>..\..\..\..\Desktop\Revere Engineering\Utils\dnlib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
