@@ -419,69 +419,27 @@ namespace MindSystemCalculator
     {
         public static bool IsAdd(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Add || op.OpCode == OpCodes.Add_Ovf || op.OpCode == OpCodes.Add_Ovf_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Add || op.OpCode == OpCodes.Add_Ovf || op.OpCode == OpCodes.Add_Ovf_Un;
         }
         public static bool IsSub(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Sub || op.OpCode == OpCodes.Sub_Ovf || op.OpCode == OpCodes.Sub_Ovf_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Sub || op.OpCode == OpCodes.Sub_Ovf || op.OpCode == OpCodes.Sub_Ovf_Un;
         }
         public static bool IsMul(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Mul || op.OpCode == OpCodes.Mul_Ovf || op.OpCode == OpCodes.Mul_Ovf_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Mul || op.OpCode == OpCodes.Mul_Ovf || op.OpCode == OpCodes.Mul_Ovf_Un;
         }
         public static bool IsDiv(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Div || op.OpCode == OpCodes.Div_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Div || op.OpCode == OpCodes.Div_Un;
         }
         public static bool IsRem(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Rem || op.OpCode == OpCodes.Rem_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Rem || op.OpCode == OpCodes.Rem_Un;
         }
         public static bool IsShr(this Instruction op)
         {
-            if (op.OpCode == OpCodes.Shr || op.OpCode == OpCodes.Shr_Un)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return op.OpCode == OpCodes.Shr || op.OpCode == OpCodes.Shr_Un;
         }
     }
 }
