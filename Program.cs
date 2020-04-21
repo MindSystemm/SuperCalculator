@@ -120,6 +120,59 @@ namespace MindSystemCalculator
                     method.Body.Instructions[i].Operand = result;
                     MathsFixed++;
                 }
+                else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_R4 && method.Body.Instructions[i + 1].OpCode == OpCodes.Call && method.Body.Instructions[i + 1].Operand.ToString().Contains("Math"))
+                {
+                    MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 1].Operand;
+                    float argument = (float)method.Body.Instructions[i].Operand;
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    float result = (float)methodInfo.Invoke(null, new object[] { argument });
+                    method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i].Operand = result;
+                    MathsFixed++;
+                }
+                else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_I4 && method.Body.Instructions[i + 1].OpCode == OpCodes.Call && method.Body.Instructions[i + 1].Operand.ToString().Contains("Math"))
+                {
+                    MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 1].Operand;
+                    int argument = (int)method.Body.Instructions[i].Operand;
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    int result = (int)methodInfo.Invoke(null, new object[] { argument });
+                    method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i].Operand = result;
+                    MathsFixed++;
+                }
+                else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_R8 && method.Body.Instructions[i+1].OpCode == OpCodes.Ldc_R8 && method.Body.Instructions[i + 2].OpCode == OpCodes.Call && method.Body.Instructions[i + 2].Operand.ToString().Contains("Math"))
+                {
+                    MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
+                    double argument = (double)method.Body.Instructions[i].Operand;
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    double result = (double)methodInfo.Invoke(null, new object[] { argument });
+                    method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i].Operand = result;
+                    MathsFixed++;
+                }
+                else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_R4 && method.Body.Instructions[i + 1].OpCode == OpCodes.Ldc_R4 && method.Body.Instructions[i + 2].OpCode == OpCodes.Call && method.Body.Instructions[i + 2].Operand.ToString().Contains("Math"))
+                {
+                    MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
+                    float argument = (float)method.Body.Instructions[i].Operand;
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    float result = (float)methodInfo.Invoke(null, new object[] { argument });
+                    method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i].Operand = result;
+                    MathsFixed++;
+                }
+                else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_I4 && method.Body.Instructions[i + 1].OpCode == OpCodes.Ldc_I4 && method.Body.Instructions[i + 2].OpCode == OpCodes.Call && method.Body.Instructions[i + 2].Operand.ToString().Contains("Math"))
+                {
+                    MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
+                    int argument = (int)method.Body.Instructions[i].Operand;
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    int result = (int)methodInfo.Invoke(null, new object[] { argument });
+                    method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
+                    method.Body.Instructions[i].Operand = result;
+                    MathsFixed++;
+                }
                 else if (method.Body.Instructions[i].IsSub() && method.Body.Instructions[i-1].IsLdcI4() && method.Body.Instructions[i -2].IsLdcI4())
                 {
                     int firstarg = method.Body.Instructions[i - 2].GetLdcI4Value();
