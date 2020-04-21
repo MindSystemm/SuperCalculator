@@ -12,7 +12,7 @@ I noticed a lot of sizeoffixer, math calculator, ... but none of them was comple
 * All Math.X
 * All X.Parse
 * Solve Type.EmptyType.Length
-* Solve all native msil operations
+* Solve all native msil operations (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/)
 * Solve Decimal.Compare
 * Solve string.Length
 
