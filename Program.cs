@@ -46,15 +46,27 @@ namespace MindSystemCalculator
                 {
                     if (method.HasBody && method.Body.HasInstructions)
                     {
-                        SizeOfFixer(method);
-                        EmptyTypesFixer(method);
-                        Cleaner(method);
-                        UnParse(method);
-                        Cleaner(method);
-                        StringsLengthFixer(method);
-                        Cleaner(method);
-                        MathsFixer(method);
-                        Cleaner(method);
+                        try
+                        {
+                            SizeOfFixer(method);
+                            EmptyTypesFixer(method);
+                            Cleaner(method);
+                            UnParse(method);
+                            Cleaner(method);
+                            StringsLengthFixer(method);
+                            Cleaner(method);
+                            MathsFixer(method);
+                            Cleaner(method);
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine("An error occured, please debug the tool to localize it");
+                            Console.WriteLine("\n");
+                            Console.WriteLine("------------------------------------------------------");
+                            Console.WriteLine("\n");
+                            Console.WriteLine(ex.ToString());
+                        }
+                       
                     }
                 }
             }
