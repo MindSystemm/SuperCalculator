@@ -6,11 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="CawkEmulatorV4">
+      <HintPath>..\..\..\..\Desktop\Reverse Engineering\Utils\CawkEmulatorV4.dll</HintPath>
+    </Reference>
     <Reference Include="de4dot.blocks">
-      <HintPath>..\..\..\..\Desktop\Revere Engineering\Utils\de4dot.blocks.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Reverse Engineering\Utils\de4dot.blocks.dll</HintPath>
     </Reference>
     <Reference Include="dnlib">
-      <HintPath>..\..\..\..\Desktop\Revere Engineering\Utils\dnlib.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Reverse Engineering\Utils\dnlib.dll</HintPath>
     </Reference>
   </ItemGroup>
 

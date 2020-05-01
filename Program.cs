@@ -1,4 +1,5 @@
-﻿using de4dot.blocks;
+﻿
+using de4dot.blocks;
 using de4dot.blocks.cflow;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
@@ -58,7 +59,7 @@ namespace MindSystemCalculator
                             MathsFixer(method);
                             Cleaner(method);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Console.WriteLine("An error occured, please debug the tool to localize it");
                             Console.WriteLine("\n");
@@ -66,7 +67,7 @@ namespace MindSystemCalculator
                             Console.WriteLine("\n");
                             Console.WriteLine(ex.ToString());
                         }
-                       
+
                     }
                 }
             }
@@ -97,6 +98,7 @@ namespace MindSystemCalculator
             Console.ReadLine();
         }
 
+     
         //This Method solve Decimal.Compare
         public static void DecimalCompareFixer(MethodDef method)
         {
@@ -126,7 +128,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i+1].Operand;
                     double argument = (double)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(double) });
                     double result = (double)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i].Operand = result;
@@ -136,7 +138,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 1].Operand;
                     float argument = (float)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(float) });
                     float result = (float)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i].Operand = result;
@@ -146,7 +148,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 1].Operand;
                     int argument = (int)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(int) });
                     int result = (int)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i].Operand = result;
@@ -156,7 +158,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
                     double argument = (double)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(double) });
                     double result = (double)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
@@ -167,7 +169,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
                     float argument = (float)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(float) });
                     float result = (float)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
@@ -178,7 +180,7 @@ namespace MindSystemCalculator
                 {
                     MemberRef MathMethod = (MemberRef)method.Body.Instructions[i + 2].Operand;
                     int argument = (int)method.Body.Instructions[i].Operand;
-                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name);
+                    MethodInfo methodInfo = typeof(Math).GetMethod(MathMethod.Name, new System.Type[] { typeof(int) });
                     int result = (int)methodInfo.Invoke(null, new object[] { argument });
                     method.Body.Instructions[i + 2].OpCode = OpCodes.Nop;
                     method.Body.Instructions[i + 1].OpCode = OpCodes.Nop;
@@ -427,7 +429,7 @@ namespace MindSystemCalculator
             }
         }
     }
-    public static class Exntensions
+    public static class Extensions
     {
         public static bool IsAdd(this Instruction op)
         {
