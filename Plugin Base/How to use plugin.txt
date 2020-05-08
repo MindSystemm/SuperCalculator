@@ -1,0 +1,6 @@
+Just add your code to the Execute method
+You can use add others method but the methods which will be executed is Execute and take as arg a MethodDef.
+Feel free to change that if you're able to ;)
+Then generate your dll and place it into the same directory as the calculator.
+
+If you encounter any issue, please contact me
