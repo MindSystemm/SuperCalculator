@@ -6,6 +6,11 @@ Helpful tool which handle most operations used in obfuscation
 Yet another calculator? so useless...
 I noticed a lot of sizeoffixer, math calculator, ... but none of them was complete so I decided to make mine
 
+#How to use plugin System ? 
+
+Plugin system allows you to create your own part of code and to execute it from the calculator. Just use
+the base I put in the release and place it IN THE SAME directory as the calculator ! 
+
 # Features
 
 * All sizeof
