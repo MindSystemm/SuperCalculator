@@ -7,6 +7,7 @@ using dnlib.DotNet.Writer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -21,6 +22,7 @@ namespace MindSystemCalculator
         public static int OperationFixed = 0;
         public static int StringsLengths = 0;
         public static int DecimalCompareFixed = 0;
+        public static List<MethodInfo> ListPlugin = new List<MethodInfo>();
         static void Main(string[] args)
         {
             Console.WriteLine(@"  ___      _         _      _   ");
@@ -39,6 +41,8 @@ namespace MindSystemCalculator
             {
                 Console.WriteLine("Please load a correct module into the calculator");
             }
+            LoadPlugin();
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             foreach (TypeDef type in module.Types)
@@ -58,6 +62,13 @@ namespace MindSystemCalculator
                             Cleaner(method);
                             MathsFixer(method);
                             Cleaner(method);
+                            if(ListPlugin.Count != 0)
+                            {
+                                foreach(MethodInfo meth in ListPlugin)
+                                {
+                                    meth.Invoke(null, new object[] { method });
+                                }
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -117,6 +128,35 @@ namespace MindSystemCalculator
                     method.Body.Instructions[i].Operand = result;
                     DecimalCompareFixed++;
                 }
+            }
+        }
+        public static void LoadPlugin()
+        {
+            List<Assembly> allAssemblies = new List<Assembly>();
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            foreach (string dll in Directory.GetFiles(path, "*.dll"))
+            {
+                if (dll.Contains("Plugin"))
+                {
+                    allAssemblies.Add(Assembly.LoadFile(dll));
+                    Console.WriteLine("Loaded plugin : " + Path.GetFileName(dll));
+                }
+
+            }
+            if (allAssemblies.Count == 0)
+                return;
+            foreach(Assembly asm in allAssemblies)
+            {
+                foreach(Type type in asm.GetTypes())
+                {
+                    if(type.Name == "Calculator")
+                    {
+                        MethodInfo meth = type.GetMethod("Execute");
+                        ListPlugin.Add(meth);
+                    }
+                }
+            
             }
         }
         //This Method Replace Math.X and solve c# native operations
